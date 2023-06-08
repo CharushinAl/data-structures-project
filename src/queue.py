@@ -1,10 +1,4 @@
-class Node:
-    """Класс для узла очереди"""
-
-    def __init__(self, data):
-        """Конструктор класса Node"""
-        self.data = data
-        self.next_node = None
+from src.node import Node
 
 
 class Queue:
@@ -35,9 +29,14 @@ class Queue:
             self.tail = new_node
 
     def dequeue(self):
-        """
-        Метод для удаления элемента из очереди. Возвращает данные удаленного элемента
+        """Метод для удаления элемента из очереди. Возвращает данные удаленного элемента"""
+        if self.head is None:
+            raise IndexError("Cannot dequeue from an empty queue")
 
-        :return: данные удаленного элемента
-        """
-        pass
+        dequeued_data = self.head.data
+        self.head = self.head.next_node
+
+        if self.head is None:
+            self.tail = None
+
+        return dequeued_data
